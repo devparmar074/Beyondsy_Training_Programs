@@ -101,13 +101,16 @@ namespace Day3
                     break;
 
                 case 52:
-                    obj1.Lowest_Common_Factor();
+                     obj1.print_Words_of_Numbers();
                     break;
 
                 case 53:
                     obj1.Highest_Common_Factor();
                     break;
 
+                case 54:
+                    obj1.Lowest_Common_Factor();
+                    break;
 
                 default:
                     break;

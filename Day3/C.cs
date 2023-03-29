@@ -516,20 +516,21 @@ namespace Day3
             list1.Reverse();
             list2.Reverse();
 
-            for (int i = 1; i <= 6; i++)
+            for (int i = 1; i <= 5; i++)
             {
 
-                for (int j = i; j <= 6; j++)
+                for (int j = i; j <= 5; j++)
                 {
                     if (list1[i] == list2[j])
                     {
-                        li
+                        list3.Add(i);
                         Console.WriteLine("Highest Common Factor : " + i);
 
                     }
                 }
 
             }
+            Console.WriteLine(list3.Max());
 
         }
 
@@ -592,6 +593,61 @@ namespace Day3
 
            
             
+        }
+
+        public void print_Words_of_Numbers()
+        {
+            Console.WriteLine("Enter Number 1 : ");
+            int number = Convert.ToInt32(Console.ReadLine());
+
+            int num = 0;
+            while (number != 0)
+            {
+                number = (number * 10) + (number % 10);
+                number /= 10;
+            }
+
+            //print corresponding digit in words till num becomes 0
+            while (num != 0)
+            {
+                switch (num % 10)
+                {
+                    case 0:
+                        Console.Write("zero ");
+                        break;
+                    case 1:
+                        Console.Write("one ");
+                        break;
+                    case 2:
+                        Console.Write("two ");
+                        break;
+                    case 3:
+                        Console.Write("three ");
+                        break;
+                    case 4:
+                        Console.Write("four ");
+                        break;
+                    case 5:
+                        Console.Write("five ");
+                        break;
+                    case 6:
+                        Console.Write("six ");
+                        break;
+                    case 7:
+                        Console.Write("seven ");
+                        break;
+                    case 8:
+                        Console.Write("eight ");
+                        break;
+                    case 9:
+                        Console.Write("nine ");
+                        break;
+                }
+                num = num / 10;
+
+
+
+            }
         }
 
 
