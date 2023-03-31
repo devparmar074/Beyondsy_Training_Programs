@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Day3
 {
-    public class C
+    public class loops
     {
 
 
@@ -55,7 +55,7 @@ namespace Day3
                 if (i > 90 && i <= 96)
                     continue;
 
-                Console.WriteLine(Convert.ToChar(i) + "'s ASCII Vaue is : "+ i);
+                Console.WriteLine(Convert.ToChar(i) + "'s ASCII Value is : "+ i);
                 Console.WriteLine(" ");
             }
         }
@@ -451,19 +451,38 @@ namespace Day3
         {
 
             try
-            {
+            {                
+                int reversed_number = 0;
+                int last_digit;
+
                 Console.WriteLine("Enter Number : ");
                 int number = Convert.ToInt32(Console.ReadLine());
 
-                int reverse = Convert.ToInt32(number.ToString().Reverse());
 
-                if (reverse == number)
+                // Division method : 
+                /*while (number > 0)
                 {
-                    Console.WriteLine(" is a Palindrome.");
+                    last_digit = number % 10;
+                    reversed_number = (reversed_number * 10) + last_digit;
+                    number /= 10;
+                }*/
+
+                //  int reverse = Convert.ToInt32(number.ToString().Reverse());
+                /*int rev = int.Parse(Console.ReadLine());
+
+                int temp = Convert.ToChar(rev);
+
+                temp.*/
+
+
+
+                if (reversed_number == number)
+                {
+                    Console.WriteLine(number+ " is a Palindrome.");
                 }
                 else
                 {
-                    Console.WriteLine(" is NOT a Palindrome.");
+                    Console.WriteLine(number+" is NOT a Palindrome.");
 
                 }
             }
@@ -490,8 +509,6 @@ namespace Day3
             List<int> list1 = new List<int>();
             List<int> list2 = new List<int>();
             List<int> list3 = new List<int>();
-
-
 
             Stack<int> num1 = new Stack<int>();
 
@@ -534,9 +551,6 @@ namespace Day3
 
         }
 
-
-
-
         public void Lowest_Common_Factor()
         {
             int result = 0;
@@ -546,7 +560,6 @@ namespace Day3
 
             Console.WriteLine("Enter Number 2 : ");
             int number2 = Convert.ToInt32(Console.ReadLine());
-
 
             List<int> list1 = new List<int>();
             List<int> list2 = new List<int>();
@@ -559,8 +572,7 @@ namespace Day3
                 if(number1 % i == 0)
                 {
                     list1.Add(i);
-                }
-                
+                }                
             }
 
             Stack<int> num2 = new Stack<int>();
@@ -570,7 +582,6 @@ namespace Day3
                 {
                     list2.Add(i);
                 }
-
             }
 
 
@@ -585,14 +596,7 @@ namespace Day3
                         
                     }
                 }
-
-
-                
-                
-            }
-
-           
-            
+            }       
         }
 
         public void print_Words_of_Numbers()
