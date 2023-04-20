@@ -1,0 +1,37 @@
+-webAPI: 
+	Example: corona virus.
+	access: users(GET).
+	Hospitals: POST,PUT,DELETE.
+
+Diff. ASP.NET Vs ASP.NET MVC:
+	-MVC return both data and views.
+	-Web API returns only data.
+
+	-in MVC, We can manage the state of data.
+	-in WebAPI, we cannot.
+		-REST is stateless.
+
+
+- Creating We API : 
+	- we cannot create apicontroller : Main Base API class.
+
+	-create Static WebAPI.
+	-Consume WebAPI with Data.
+	-getallEmployee
+	-getEployeeById
+
+-Create WebAPI with Database First Approach :
+	-get data from Database.
+	-Consume WebAPI with Database First Approach
+	-getallemployee
+	
+
+------------------------------------------------
+
+Following are the updates of 10th April 2023.
+-----------------------------------------------------------------
+Topic : WebAPI in C#
+=> Task 1 : Diff. ASP.NET Vs ASP.NET MVC.
+=> Task 2 :Create WebAPI with Database First Approach WebAPI and webAPI MVC both
+=> Task 3 : How to Consume WebAPI.
+______________________________________________________

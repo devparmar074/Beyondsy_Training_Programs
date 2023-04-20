@@ -8,11 +8,8 @@ namespace Day5
 {
     public class Constructor_Practice
     {
-
-        private static string Name;
-        private static string City;
-
-        
+            private static string Name;
+            private static string City;
 
         public Constructor_Practice()
         {
@@ -23,17 +20,24 @@ namespace Day5
             Console.WriteLine("Hello, " + Name + " you are from " + City);
         }
 
-
-
-        public Constructor_Practice(string name , string city)
+        public Constructor_Practice(string name, string city)
         {
             Name = name;
             City = city;
             Console.WriteLine("from Parameterized Constructor : ");
             Console.WriteLine("Hello, " + name + " you are from " + city);
         }
+    }
+    
+
+ }
+
+
+    
+
+       
 
 
                 
-    }
-}
+
+

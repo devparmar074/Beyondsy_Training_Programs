@@ -460,22 +460,13 @@ namespace Day3
 
 
                 // Division method : 
-                /*while (number > 0)
+                while (number > 0)
                 {
                     last_digit = number % 10;
                     reversed_number = (reversed_number * 10) + last_digit;
                     number /= 10;
-                }*/
-
-                //  int reverse = Convert.ToInt32(number.ToString().Reverse());
-                /*int rev = int.Parse(Console.ReadLine());
-
-                int temp = Convert.ToChar(rev);
-
-                temp.*/
-
-
-
+                }
+                               
                 if (reversed_number == number)
                 {
                     Console.WriteLine(number+ " is a Palindrome.");
@@ -490,8 +481,7 @@ namespace Day3
             {
                 Console.WriteLine(e.Message);
             }
-
-            
+ 
         }
 
 

@@ -18,8 +18,8 @@ namespace Day5
             Console.WriteLine("enter passwrod : ");
             password = Console.ReadLine();
 
-            Console.WriteLine("Name : "+ name + "City : "+ password+ "\n");
-            Console.WriteLine("You are Logged in at "+DateTime.Now);
+            //Console.WriteLine("Name : "+ name + "City : "+ password+ "\n");
+            Console.WriteLine(name+", You are Logged in at "+DateTime.Now);
         }
 
         

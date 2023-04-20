@@ -1,0 +1,58 @@
+CRUD : 
+
+
+	-For Display Data: 
+	ActionResult Index()
+	{
+		var list = database_object.Class.Tolist();
+	}
+
+------------------------------------------------------------	
+	-Create : 	
+	 ActionResult Create()
+	 {
+		return view();
+	 }
+	
+	 ActionResult Create(Class object)
+	 {
+		object(database_Object).Class.Add(Object(Class_Object));
+		
+		ViewBag.Message = "Inserted Successfully.";
+		return view();
+	 }
+-------------------------------------------------------------
+
+	-Update: 
+	ActionResult(int id)
+	{
+		var data = database object.Class.Where(x=> x.db_id == id).FirstOrDefault();
+		return View();
+	}
+	
+	ActionResult Edit(Class Object)
+	{
+		var data = database object.Class.Where(x=> x.db_id== Model.tbl_id).FirstOrDefault();
+		
+		if(data != null)
+		{
+			data.column = model.column;
+			db_object.SaveChanges();
+		}
+		
+		return RedirectToAction("Index");
+	}
+	
+
+
+
+
+----------------------------------------------------------
+
+Following are the updates of 13th April 2023.
+-----------------------------------------------------------------
+Topic :
+=> Task 1 : Learn dataview in database first approach.
+
+____________________________________________________________________________________
+

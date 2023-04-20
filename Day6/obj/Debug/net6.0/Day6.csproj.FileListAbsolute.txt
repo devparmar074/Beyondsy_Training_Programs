@@ -1,0 +1,15 @@
+D:\Dev\Day6\obj\Debug\net6.0\Day6.csproj.AssemblyReference.cache
+D:\Dev\Day6\obj\Debug\net6.0\Day6.GeneratedMSBuildEditorConfig.editorconfig
+D:\Dev\Day6\obj\Debug\net6.0\Day6.AssemblyInfoInputs.cache
+D:\Dev\Day6\obj\Debug\net6.0\Day6.AssemblyInfo.cs
+D:\Dev\Day6\obj\Debug\net6.0\Day6.csproj.CoreCompileInputs.cache
+D:\Dev\Day6\bin\Debug\net6.0\Day6.exe
+D:\Dev\Day6\bin\Debug\net6.0\Day6.deps.json
+D:\Dev\Day6\bin\Debug\net6.0\Day6.runtimeconfig.json
+D:\Dev\Day6\bin\Debug\net6.0\Day6.dll
+D:\Dev\Day6\bin\Debug\net6.0\Day6.pdb
+D:\Dev\Day6\obj\Debug\net6.0\Day6.dll
+D:\Dev\Day6\obj\Debug\net6.0\refint\Day6.dll
+D:\Dev\Day6\obj\Debug\net6.0\Day6.pdb
+D:\Dev\Day6\obj\Debug\net6.0\Day6.genruntimeconfig.cache
+D:\Dev\Day6\obj\Debug\net6.0\ref\Day6.dll

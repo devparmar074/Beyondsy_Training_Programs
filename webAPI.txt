@@ -1,0 +1,8 @@
+-create an api,
+-connect db,
+-make controller of it,
+-make Action_Result,
+-open model.context.cs file,
+-copy class name and make object in controller.
+-access tables data through that object.
+-return obj(ok)

@@ -1,0 +1,39 @@
+-Life cycle : 
+	-app start : register route, bundle, 
+	->	
+	-routing : route table mapped which Request is map with which resource.
+	->
+	-MVC HAndler : request is here agter Routing
+	->
+	IControllerFactory : Create Controller instance initialize.
+	->
+	Create TempData Provider
+	->
+	-Contrlooer Create Action Invoker
+	->
+	Authrntication filter : is NO then, Controller dispose.
+	->
+	Authorization filter :
+	-> 
+	Model Binder : bind the data from http request and bind into Action Method.	
+	->
+	-Action filter
+	->
+	-Execute result and Execution filter : 
+	->
+	-Action Method : view return 
+	-if no, Direct response by controller dispose
+	->
+	- if Yes, data sent to view(index) -> first execute index then layout 
+	->
+	-layout code  make result sent to	 mvc HAndler 
+	-And HAndler sent data to Server.
+	-> Controller dispose.
+
+-----------------------------------------------------------------------------------------------------------------
+The MVC framework handles converting the route data into a concrete controller that can handle requests. After the controller has been created, the next major step is Action Execution. A component called the action invoker finds and selects an appropriate Action method to invoke the controller.
+
+After our action result has been prepared, the next stage triggers, which is Result Execution. MVC separates declaring the result from executing the result. If the result is a view type, the View Engine will be called and it's responsible for finding and rending our view.
+
+If the result is not a view, the action result will execute on its own. This Result Execution is what generates an actual response to the original HTTP request.
+------------------------------------------------------------------------------------------------------------------------------------------------------------

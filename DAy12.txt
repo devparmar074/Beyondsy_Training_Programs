@@ -1,0 +1,37 @@
+only accept json data:
+-remove xml formater.
+--2 Approaches : 
+	1) config.formatters.jsonFormatter.SupportMediaTypes.Add(new mediatype header value = text/html");
+	2) make custom class inherited from jsonMediaFormatter : add supported mediatype-> new mediaheader value + text/html.
+		-Override setDefaultContentHeader
+		-header.contenttype = application/json.
+		- Base set default content header 
+
+-------------------------------------------------------
+
+Status Code:
+- 200 : OK
+- 201 : new res Created.
+- 204 : No Content.
+- 301 : Moved Permanently.
+- 400 : Bad Request.
+- 401 : UnAuthorized.
+- 404 : Not Found.
+- 405 : Method Not Allowed.
+- 500 : Internal Server.
+
+
+- if, a method return type is void then, by default status code is 204 no content is returned.
+
+-when new item is created, we should be returning status code 201 item is created.
+
+---------------------------------------
+Following are the updates of 12th April 2023.
+-----------------------------------------------------------------
+Topic : WebAPI in C#
+=> Task 1 : Overview of WebApi MVC.
+=> Task 2 : How to accept only json data.
+=> Task 3 : Learnt HTTP message status code.
+____________________________________________________________________________________
+
+
