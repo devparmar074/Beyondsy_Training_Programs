@@ -1,0 +1,43 @@
+﻿@model MainCrud.models.Student
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Student</h4>
+    <hr />
+    @*<dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+           @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>*@
+
+    <table class="table">
+
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Gender</th>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayFor(model => model.Id)</td>
+            <td>@Html.DisplayFor(model => model.Name)</td>
+            <td>@Html.DisplayFor(model => model.Gender)</td>
+        </tr>
+    </table>
+
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

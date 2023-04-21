@@ -53,8 +53,6 @@ namespace MainCrud.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            ViewBag.updateTitle = "Update Student";
-
             var obj = listOfStudents.Where(x => x.Id == id).FirstOrDefault();
             return View(obj);
         }
@@ -63,15 +61,38 @@ namespace MainCrud.Controllers
         [HttpPost]
         public ActionResult Edit(Student obj)
         {
+            var selectedvalue = obj.Gender;
+            
+            ViewBag.GenderType = selectedvalue.ToString();
             var data = listOfStudents.Where(x => x.Id == obj.Id).FirstOrDefault();
             if (data != null)
-            {
-                data.Id = obj.Id;
+            {                
                 data.Name = obj.Name;
+               // data.Gender = obj.Gender;
+                data.Standard = obj.Standard;
+                data.Division = obj.Division;
+                data.City = obj.City;
+                data.Contact = obj.Contact;
             }
 
-            //return RedirectToAction("Index");
-            return View("Index");
+            return RedirectToAction("Index",obj);
+            //return View("Index");
         }
+
+
+        public ActionResult Delete(int id)
+        {
+            var deleteData = listOfStudents.Where(x => x.Id == id).FirstOrDefault();
+           
+            listOfStudents.Remove(deleteData);
+
+           // ViewData["Students"] = listOfStudents;
+
+            
+            return RedirectToAction("index");
+            //return View("Index");
+
+        }
+
     }
 }
