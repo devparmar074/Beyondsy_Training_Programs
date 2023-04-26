@@ -18,6 +18,7 @@ namespace MainCrud.Controllers
             return View();
         }*/
 
+
         public ActionResult Index(Student studentObject)
         {
             ViewBag.model = listOfStudents;
@@ -64,11 +65,12 @@ namespace MainCrud.Controllers
             var selectedvalue = obj.Gender;
             
             ViewBag.GenderType = selectedvalue.ToString();
+
             var data = listOfStudents.Where(x => x.Id == obj.Id).FirstOrDefault();
             if (data != null)
             {                
                 data.Name = obj.Name;
-               // data.Gender = obj.Gender;
+                data.Gender = obj.Gender;
                 data.Standard = obj.Standard;
                 data.Division = obj.Division;
                 data.City = obj.City;

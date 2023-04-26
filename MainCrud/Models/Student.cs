@@ -21,8 +21,11 @@ namespace MainCrud.models
 
         [Required(ErrorMessage = "Please Enter standard 1-12.")]
         [Range (1, 12)]
-        
+
+
+       // Without DropDownList
         public int Standard { get; set; }
+       // public List<int> Standard { get; set; }
 
         [Required(ErrorMessage = "Please Enter Standard.")]
         public char Division { get; set; }
