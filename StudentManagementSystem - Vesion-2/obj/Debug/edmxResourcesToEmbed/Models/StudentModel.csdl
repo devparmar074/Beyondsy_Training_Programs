@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StudentManagementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="GenderTable">
+    <Key>
+      <PropertyRef Name="GenderId" />
+    </Key>
+    <Property Name="GenderId" Type="Int32" Nullable="false" />
+    <Property Name="GenderType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_Student_GenderTable" FromRole="GenderTable" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="StandardTable">
+    <Key>
+      <PropertyRef Name="StandardId" />
+    </Key>
+    <Property Name="StandardId" Type="Int32" Nullable="false" />
+    <Property Name="Standard" Type="Int32" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_Student_StandardTable" FromRole="StandardTable" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Division" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Contact" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="GenderId" Type="Int32" />
+    <Property Name="StandardId" Type="Int32" />
+    <NavigationProperty Name="GenderTable" Relationship="Self.FK_Student_GenderTable" FromRole="Student" ToRole="GenderTable" />
+    <NavigationProperty Name="StandardTable" Relationship="Self.FK_Student_StandardTable" FromRole="Student" ToRole="StandardTable" />
+  </EntityType>
+  <Association Name="FK_Student_GenderTable">
+    <End Role="GenderTable" Type="Self.GenderTable" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GenderTable">
+        <PropertyRef Name="GenderId" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="GenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_StandardTable">
+    <End Role="StandardTable" Type="Self.StandardTable" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StandardTable">
+        <PropertyRef Name="StandardId" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="StandardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StudentManagementSystemEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="GenderTables" EntityType="Self.GenderTable" />
+    <EntitySet Name="StandardTables" EntityType="Self.StandardTable" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <AssociationSet Name="FK_Student_GenderTable" Association="Self.FK_Student_GenderTable">
+      <End Role="GenderTable" EntitySet="GenderTables" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_StandardTable" Association="Self.FK_Student_StandardTable">
+      <End Role="StandardTable" EntitySet="StandardTables" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

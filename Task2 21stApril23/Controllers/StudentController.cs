@@ -29,7 +29,6 @@ namespace Task2_21stApril23.Controllers
             ViewBag.genderList = new SelectList(genderList, "GenderId", "GenderType");
 
 
-
             List<StandardTable> listOfStandard = dbObject.StandardTables.ToList();
             ViewBag.listOfStandard = new SelectList(listOfStandard, "StandardId", "Standard");
 
@@ -95,12 +94,14 @@ namespace Task2_21stApril23.Controllers
         public ActionResult Edit(int id)
         {
             var data = dbObject.Students.Where(x => x.Id == id).FirstOrDefault();
+
             List<GenderTable> genderList = dbObject.GenderTables.ToList();
             ViewBag.genderList = new SelectList(genderList, "GenderId", "GenderType");
 
 
             List<StandardTable> listOfStandard = dbObject.StandardTables.ToList();
-            ViewBag.listOfStandard = new SelectList(listOfStandard, "StandardId", "Standard");
+            ViewBag.listOfStandard = new SelectList(listOfStandard, "   ", "Standard");
+
             return View(data);
         }
 
