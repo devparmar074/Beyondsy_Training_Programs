@@ -14,8 +14,7 @@ namespace BarberShopSystem.Controllers
 
                    
         public ActionResult Regstration()
-        {
-             
+        {             
             return View();
         }
 
@@ -24,13 +23,15 @@ namespace BarberShopSystem.Controllers
             return View();
         }
 
-        public ActionResult Profile()
+        /*public ActionResult Profile()
         {
             List<BarberShop> barberShopData = new List<BarberShop>();
             return View(barberShopData);
-        }
+        }*/
 
-        [HttpGet]
+       
+
+       /* [HttpGet]
         public ActionResult AddShopData()
         {
             return View();
@@ -42,7 +43,7 @@ namespace BarberShopSystem.Controllers
             dbObject.BarberShops.Add(barbershopObject);
             dbObject.SaveChanges();
             return View("Profile");
-        }
+        }*/
 
         
         public ActionResult HairStylist()

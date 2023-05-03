@@ -130,6 +130,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BarberShopController.cs" />
+    <Compile Include="Controllers\BookingController.cs" />
+    <Compile Include="Controllers\HairStylistController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -177,6 +179,7 @@
     <Compile Include="Models\UserTypes2.cs">
       <DependentUpon>BarberBooking.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\UserReg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -236,14 +239,19 @@
     <Content Include="Views\BarberShop\AddShopData.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
-    <Content Include="Views\User\ChooseUser.cshtml" />
     <Content Include="Views\User\ShopRegistration.cshtml" />
     <Content Include="Views\User\UpdateShopProfile.cshtml" />
     <Content Include="Views\User\DeleteShopData.cshtml" />
     <Content Include="Views\User\UpdateProfile.cshtml" />
+    <Content Include="Views\User\ShopProfile.cshtml" />
+    <Content Include="Views\HairStylist\GetHairStylists.cshtml" />
+    <Content Include="Views\HairStylist\AddHairStylist.cshtml" />
+    <Content Include="Views\HairStylist\UpdateHairStylist.cshtml" />
+    <Content Include="Views\User\ChooseUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Booking\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

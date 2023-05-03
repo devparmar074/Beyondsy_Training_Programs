@@ -1,19 +1,32 @@
 ﻿@model IEnumerable<BarberShopSystem.Models.BarberShop>
 
 @{
-    ViewBag.Title = "Profile";
+    ViewBag.Title = "ShopProfile";
 }
 
-<h2>Profile</h2>
+<h2>ShopProfile</h2>
 
 <p>
-    @Html.ActionLink("Create New", "ChooseUser")
+    @Html.ActionLink("Add New BarberShop", "ShopRegistration")
+
+</p>
+
+<p>
+    <span>@Html.ActionLink("Shops Hairstylists", "GetHairStylists","HairStylist")</span>
 </p>
 <table class="table">
     <tr>
+
+       @* <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>*@
+
         <th>
             @Html.DisplayNameFor(model => model.ShopName)
         </th>
+
+        
+
         <th>
             @Html.DisplayNameFor(model => model.ShopAddress)
         </th>
@@ -29,17 +42,18 @@
         <th>
             @Html.DisplayNameFor(model => model.Status)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShopPassword)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.User.UserType)
-        </th>*@
+
+
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+       @* <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>*@
+
+
         <td>
             @Html.DisplayFor(modelItem => item.ShopName)
         </td>
@@ -58,16 +72,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.Status)
         </td>
+       
+
         <td>
-            @Html.DisplayFor(modelItem => item.ShopPassword)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.User.UserType)
-        </td>*@
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ShopId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ShopId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ShopId })
+            @Html.ActionLink("Edit", "UpdateShopProfile", new { id = item.ShopId }) |
+            
+            @Html.ActionLink("Delete", "DeleteShopData", new { id = item.ShopId })
         </td>
     </tr>
 }

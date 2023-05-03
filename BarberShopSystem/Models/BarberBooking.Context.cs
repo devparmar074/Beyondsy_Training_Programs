@@ -34,5 +34,7 @@ namespace BarberShopSystem.Models
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserTypes2> UserTypes2 { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
+
+        public System.Data.Entity.DbSet<BarberShopSystem.Models.ViewModel.UserReg> UserRegs { get; set; }
     }
 }

@@ -25,9 +25,9 @@ namespace BarberShopSystem.Models
         public int ShopId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public string MobileNumeber { get; set; }
         public string City { get; set; }
         public Nullable<int> Experience { get; set; }
+        public string MobileNumber { get; set; }
     
         public virtual BarberShop BarberShop { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -6,19 +6,19 @@
     </Key>
     <Property Name="ShopId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="OpenTime" Type="DateTime" Precision="3" />
     <Property Name="CloseTime" Type="DateTime" Precision="3" />
     <Property Name="Status" Type="Boolean" />
-    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="User" Relationship="Self.FK_BarberShop_User1" FromRole="BarberShop" ToRole="User" />
     <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_BarberShop" FromRole="BarberShop" ToRole="Booking" />
     <NavigationProperty Name="Haircuts" Relationship="Self.FK_Haircut_BarberShop" FromRole="BarberShop" ToRole="Haircut" />
     <NavigationProperty Name="HairStylists" Relationship="Self.FK_HairStylist_BarberShop" FromRole="BarberShop" ToRole="HairStylist" />
     <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_BarberShop" FromRole="BarberShop" ToRole="Payment" />
     <NavigationProperty Name="Reviews" Relationship="Self.FK_Review_BarberShop" FromRole="BarberShop" ToRole="Review" />
+    <Property Name="ShopName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShopAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShopCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShopPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Booking">
     <Key>
@@ -58,12 +58,12 @@
     <Property Name="ShopId" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="MobileNumeber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="City" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="Experience" Type="Int32" />
     <NavigationProperty Name="BarberShop" Relationship="Self.FK_HairStylist_BarberShop" FromRole="HairStylist" ToRole="BarberShop" />
     <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_HairStylist" FromRole="HairStylist" ToRole="Booking" />
     <NavigationProperty Name="Haircuts" Relationship="Self.FK_Haircut_HairStylist" FromRole="HairStylist" ToRole="Haircut" />
+    <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Review">
     <Key>
@@ -100,7 +100,7 @@
     <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Birthdate" Type="DateTime" Precision="3" />
     <Property Name="IsMobileVerified" Type="Boolean" />
-    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
     <NavigationProperty Name="BarberShops" Relationship="Self.FK_BarberShop_User1" FromRole="User" ToRole="BarberShop" />
     <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_User1" FromRole="User" ToRole="Booking" />
     <NavigationProperty Name="Reviews" Relationship="Self.FK_Review_User1" FromRole="User" ToRole="Review" />

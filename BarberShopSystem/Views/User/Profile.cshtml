@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<BarberShopSystem.Models.User>
 
+@Html.Hidden("UserTypeId")
 @{
     ViewBag.Title = "Profile";
 }
@@ -7,11 +8,15 @@
 <h2>Profile</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "ChooseUser")
 </p>
 <table class="table">
     <tr>
-       
+
+       @* <th>
+            @Html.DisplayNameFor(model => model.UserTypeId)
+        </th>*@
+
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -30,13 +35,15 @@
         <th>
             @Html.DisplayNameFor(model => model.Birthdate)
         </th>
-        
+
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-       
+     @*  <td>
+           @Html.DisplayFor(modelItem => item.UserTypeId)
+       </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>

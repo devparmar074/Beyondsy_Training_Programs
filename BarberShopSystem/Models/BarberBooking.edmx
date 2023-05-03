@@ -4,20 +4,20 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BarberShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BarberShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BarberShop">
           <Key>
             <PropertyRef Name="ShopId" />
           </Key>
           <Property Name="ShopId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="Address" Type="nvarchar" MaxLength="50" />
-          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShopName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShopAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShopCity" Type="nvarchar" MaxLength="50" />
           <Property Name="OpenTime" Type="datetime" />
           <Property Name="CloseTime" Type="datetime" />
           <Property Name="Status" Type="bit" />
-          <Property Name="Password" Type="varchar" MaxLength="100" />
+          <Property Name="ShopPassword" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Booking">
           <Key>
@@ -49,7 +49,7 @@
           <Property Name="ShopId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
-          <Property Name="MobileNumeber" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="City" Type="nchar" MaxLength="10" />
           <Property Name="Experience" Type="int" />
         </EntityType>
@@ -104,7 +104,7 @@ warning 6002: The table/view 'BarberShop.dbo.Payment' does not have a primary ke
           <Property Name="Gender" Type="nvarchar" MaxLength="50" />
           <Property Name="Birthdate" Type="datetime" />
           <Property Name="IsMobileVerified" Type="bit" />
-          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedDate" Type="date" />
         </EntityType>
         <EntityType Name="UserTypes2">
           <Key>
@@ -360,8 +360,7 @@ warning 6002: The table/view 'BarberShop.dbo.Payment' does not have a primary ke
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BarberShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -371,19 +370,19 @@ warning 6002: The table/view 'BarberShop.dbo.Payment' does not have a primary ke
           </Key>
           <Property Name="ShopId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OpenTime" Type="DateTime" Precision="3" />
           <Property Name="CloseTime" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Boolean" />
-          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_BarberShop_User1" FromRole="BarberShop" ToRole="User" />
           <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_BarberShop" FromRole="BarberShop" ToRole="Booking" />
           <NavigationProperty Name="Haircuts" Relationship="Self.FK_Haircut_BarberShop" FromRole="BarberShop" ToRole="Haircut" />
           <NavigationProperty Name="HairStylists" Relationship="Self.FK_HairStylist_BarberShop" FromRole="BarberShop" ToRole="HairStylist" />
           <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_BarberShop" FromRole="BarberShop" ToRole="Payment" />
           <NavigationProperty Name="Reviews" Relationship="Self.FK_Review_BarberShop" FromRole="BarberShop" ToRole="Review" />
+          <Property Name="ShopName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShopAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShopCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShopPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Booking">
           <Key>
@@ -423,12 +422,12 @@ warning 6002: The table/view 'BarberShop.dbo.Payment' does not have a primary ke
           <Property Name="ShopId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MobileNumeber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="City" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Experience" Type="Int32" />
           <NavigationProperty Name="BarberShop" Relationship="Self.FK_HairStylist_BarberShop" FromRole="HairStylist" ToRole="BarberShop" />
           <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_HairStylist" FromRole="HairStylist" ToRole="Booking" />
           <NavigationProperty Name="Haircuts" Relationship="Self.FK_Haircut_HairStylist" FromRole="HairStylist" ToRole="Haircut" />
+          <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Review">
           <Key>
@@ -465,7 +464,7 @@ warning 6002: The table/view 'BarberShop.dbo.Payment' does not have a primary ke
           <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Birthdate" Type="DateTime" Precision="3" />
           <Property Name="IsMobileVerified" Type="Boolean" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="BarberShops" Relationship="Self.FK_BarberShop_User1" FromRole="User" ToRole="BarberShop" />
           <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_User1" FromRole="User" ToRole="Booking" />
           <NavigationProperty Name="Reviews" Relationship="Self.FK_Review_User1" FromRole="User" ToRole="Review" />
@@ -743,15 +742,15 @@ warning 6002: The table/view 'BarberShop.dbo.Payment' does not have a primary ke
           <EntitySetMapping Name="BarberShops">
             <EntityTypeMapping TypeName="BarberShopModel.BarberShop">
               <MappingFragment StoreEntitySet="BarberShop">
+                <ScalarProperty Name="ShopPassword" ColumnName="ShopPassword" />
+                <ScalarProperty Name="ShopCity" ColumnName="ShopCity" />
+                <ScalarProperty Name="ShopAddress" ColumnName="ShopAddress" />
+                <ScalarProperty Name="ShopName" ColumnName="ShopName" />
                 <ScalarProperty Name="ShopId" ColumnName="ShopId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="OpenTime" ColumnName="OpenTime" />
                 <ScalarProperty Name="CloseTime" ColumnName="CloseTime" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -782,11 +781,11 @@ warning 6002: The table/view 'BarberShop.dbo.Payment' does not have a primary ke
           <EntitySetMapping Name="HairStylists">
             <EntityTypeMapping TypeName="BarberShopModel.HairStylist">
               <MappingFragment StoreEntitySet="HairStylist">
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
                 <ScalarProperty Name="HairStylistId" ColumnName="HairStylistId" />
                 <ScalarProperty Name="ShopId" ColumnName="ShopId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="MobileNumeber" ColumnName="MobileNumeber" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Experience" ColumnName="Experience" />
               </MappingFragment>

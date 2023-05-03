@@ -26,13 +26,13 @@ namespace BarberShopSystem.Models
     
         public int ShopId { get; set; }
         public int UserId { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public string City { get; set; }
         public Nullable<System.DateTime> OpenTime { get; set; }
         public Nullable<System.DateTime> CloseTime { get; set; }
         public Nullable<bool> Status { get; set; }
-        public string Password { get; set; }
+        public string ShopName { get; set; }
+        public string ShopAddress { get; set; }
+        public string ShopCity { get; set; }
+        public string ShopPassword { get; set; }
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

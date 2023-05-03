@@ -6,13 +6,13 @@
     </Key>
     <Property Name="ShopId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="Address" Type="nvarchar" MaxLength="50" />
-    <Property Name="City" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShopName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShopAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShopCity" Type="nvarchar" MaxLength="50" />
     <Property Name="OpenTime" Type="datetime" />
     <Property Name="CloseTime" Type="datetime" />
     <Property Name="Status" Type="bit" />
-    <Property Name="Password" Type="varchar" MaxLength="100" />
+    <Property Name="ShopPassword" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Booking">
     <Key>
@@ -44,7 +44,7 @@
     <Property Name="ShopId" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
-    <Property Name="MobileNumeber" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobileNumber" Type="nvarchar" MaxLength="50" />
     <Property Name="City" Type="nchar" MaxLength="10" />
     <Property Name="Experience" Type="int" />
   </EntityType>
@@ -99,7 +99,7 @@ warning 6002: The table/view 'BarberShop.dbo.Payment' does not have a primary ke
     <Property Name="Gender" Type="nvarchar" MaxLength="50" />
     <Property Name="Birthdate" Type="datetime" />
     <Property Name="IsMobileVerified" Type="bit" />
-    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedDate" Type="date" />
   </EntityType>
   <EntityType Name="UserTypes2">
     <Key>
