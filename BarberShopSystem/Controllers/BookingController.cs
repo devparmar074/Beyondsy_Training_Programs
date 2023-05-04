@@ -15,5 +15,7 @@ namespace BarberShopSystem.Controllers
 
             return View();
         }
+
+
     }
 }

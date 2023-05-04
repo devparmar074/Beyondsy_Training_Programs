@@ -18,6 +18,7 @@
           <Property Name="CloseTime" Type="datetime" />
           <Property Name="Status" Type="bit" />
           <Property Name="ShopPassword" Type="varchar" MaxLength="100" />
+          <Property Name="ShopKey" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Booking">
           <Key>
@@ -383,6 +384,7 @@ warning 6002: The table/view 'BarberShop.dbo.Payment' does not have a primary ke
           <Property Name="ShopAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ShopCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ShopPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ShopKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Booking">
           <Key>
@@ -742,6 +744,7 @@ warning 6002: The table/view 'BarberShop.dbo.Payment' does not have a primary ke
           <EntitySetMapping Name="BarberShops">
             <EntityTypeMapping TypeName="BarberShopModel.BarberShop">
               <MappingFragment StoreEntitySet="BarberShop">
+                <ScalarProperty Name="ShopKey" ColumnName="ShopKey" />
                 <ScalarProperty Name="ShopPassword" ColumnName="ShopPassword" />
                 <ScalarProperty Name="ShopCity" ColumnName="ShopCity" />
                 <ScalarProperty Name="ShopAddress" ColumnName="ShopAddress" />

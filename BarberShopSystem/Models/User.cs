@@ -11,9 +11,8 @@ namespace BarberShopSystem.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.Entity.Core.Objects.DataClasses;
-
-    public partial class User 
+    
+    public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()

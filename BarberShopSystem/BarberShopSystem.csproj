@@ -248,6 +248,7 @@
     <Content Include="Views\HairStylist\AddHairStylist.cshtml" />
     <Content Include="Views\HairStylist\UpdateHairStylist.cshtml" />
     <Content Include="Views\User\ChooseUser.cshtml" />
+    <Content Include="Views\User\ShopLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

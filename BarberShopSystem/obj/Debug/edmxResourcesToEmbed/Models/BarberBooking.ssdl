@@ -13,6 +13,7 @@
     <Property Name="CloseTime" Type="datetime" />
     <Property Name="Status" Type="bit" />
     <Property Name="ShopPassword" Type="varchar" MaxLength="100" />
+    <Property Name="ShopKey" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Booking">
     <Key>

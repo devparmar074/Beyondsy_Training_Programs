@@ -33,6 +33,7 @@ namespace BarberShopSystem.Models
         public string ShopAddress { get; set; }
         public string ShopCity { get; set; }
         public string ShopPassword { get; set; }
+        public string ShopKey { get; set; }
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

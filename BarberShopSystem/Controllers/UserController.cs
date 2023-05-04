@@ -11,7 +11,7 @@ namespace BarberShopSystem.Controllers
    /* public class ViewModel
     {
         public IEnumerable<BarberShop> BarberShop { get; set; }
-        public IEnumerable<User> User { get; set; }
+        public IEnumerable<n   > User { get; set; }
     }*/
 
 
@@ -20,7 +20,6 @@ namespace BarberShopSystem.Controllers
         // BarberShop Entity Object Created.
         BarberShopEntities2 dbObject = new BarberShopEntities2();
                 
-
 
         [HttpGet]
         public ActionResult ChooseUser()
@@ -44,7 +43,6 @@ namespace BarberShopSystem.Controllers
         public ActionResult ChooseUser(UserTypes2 usertype)
         {
            
-
             /* var type = usertype.UserTypeId;*/
 
             /*if (usertype.UserTypeId == 1)
@@ -69,7 +67,16 @@ namespace BarberShopSystem.Controllers
         /// </summary>
         /// 
 
-
+        public static string GenerateRandomText(int textLength)
+        {
+            const string Chars = "ABCDEFGHIJKLMNPOQRSTUVWXYZ0123456789";
+            var random = new Random();
+            var result = new string(
+                Enumerable.Repeat(Chars, textLength)
+                    .Select(s => s[random.Next(s.Length)])
+                    .ToArray());
+            return result;
+        }
 
         [HttpGet]
         public ActionResult ShopRegistration()
@@ -81,25 +88,77 @@ namespace BarberShopSystem.Controllers
         [HttpPost]
         public ActionResult ShopRegistration(BarberShop barbershopObject)
         {
+            var key = GenerateRandomText(10);
+            barbershopObject.ShopKey = key;
+
+           /* dbObject.BarberShops.Attach(barbershopObject);*/
+
             dbObject.BarberShops.Add(barbershopObject);
+
             dbObject.SaveChanges();
             return RedirectToAction("ShopProfile");
         }
 
+        [HttpGet]
+        public ActionResult ShopLogin()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ShopLogin(BarberShop barbershopObject)
+        {
+            var credentials = dbObject.BarberShops.Where(model => model.ShopKey == barbershopObject.ShopKey && model.ShopPassword == barbershopObject.ShopPassword);
+
+            if(credentials == null)
+            {
+                return View();
+            }
+            else
+            {
+                Session["ShopKey"] = barbershopObject.ShopKey;
+                /* Session["Password"] = */
+                return RedirectToAction("ShopProfile");
+            }
+
+            return View();
+        }
+
+
+
 
         [HttpGet]
+        
         public ActionResult ShopProfile()
         {
-            List<BarberShop> barbershopList = dbObject.BarberShops.ToList();
-            ViewBag.barbershopList = barbershopList;
-            return View(barbershopList);
+            if (Session["ShopKey"] == null)
+            {
+                return RedirectToAction("ShopLogin");
+            }
+            else
+            {
+                List<BarberShop> barbershopList = dbObject.BarberShops.ToList();
+                ViewBag.barbershopList = barbershopList;
+                return View(barbershopList);
+            }
+                        
         }
 
         [HttpGet]
         public ActionResult UpdateShopProfile(int id)
         {
-            var barbershopRecord = dbObject.BarberShops.Where(x => x.ShopId == id).FirstOrDefault();
-            return View(barbershopRecord);
+            if (Session["ShopKey"] == null)
+            {
+                return RedirectToAction("ShopLogin");
+            }
+            else
+            {
+                var barbershopRecord = dbObject.BarberShops.Where(x => x.ShopId == id).FirstOrDefault();
+                return View(barbershopRecord);
+            }
+
+                
         }
 
         [HttpPost]
@@ -131,15 +190,16 @@ namespace BarberShopSystem.Controllers
         }
 
 
-        
+       /* [HttpGet]
         public ActionResult GetHairStylist()
         {
             List<HairStylist> listOfhairStylist = dbObject.HairStylists.ToList();
 
             return View(listOfhairStylist);
-        }
+        }*/
 
 
+        // For a User : 
 
         [HttpGet]
         public ActionResult Registration()

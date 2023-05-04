@@ -11,47 +11,7 @@ namespace BarberShopSystem.Controllers
     {
         // Object Created
         BarberShopEntities2 dbObject = new BarberShopEntities2();
-
-                   
-        public ActionResult Regstration()
-        {             
-            return View();
-        }
-
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-        /*public ActionResult Profile()
-        {
-            List<BarberShop> barberShopData = new List<BarberShop>();
-            return View(barberShopData);
-        }*/
-
-       
-
-       /* [HttpGet]
-        public ActionResult AddShopData()
-        {
-            return View();
-        }
-
-        [HttpPost]  
-        public ActionResult AddShopData(BarberShop barbershopObject)
-        {
-            dbObject.BarberShops.Add(barbershopObject);
-            dbObject.SaveChanges();
-            return View("Profile");
-        }*/
-
-        
-        public ActionResult HairStylist()
-        {
-
-
-            return View();
-        }
+                           
 
         public ActionResult Timeslots()
         {

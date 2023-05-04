@@ -1,50 +1,99 @@
 ﻿using Microsoft.Ajax.Utilities;
+using SessionPracice.Filters;
 using SessionPracice.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.SessionState;
 
 namespace SessionPracice.Controllers
 {
+    /*[SessionState(SessionStateBehavior.Required)]*/
+
     
     public class HomeController : Controller
     {
         PracticeEntities2 dbObject = new PracticeEntities2();
 
-        [Authorize]
+
+        [CustomAuthenticationFilter]
         public ActionResult Index()
         {
-            List<Student> studentData = dbObject.Students.ToList();
-            return View(studentData);
+           /* if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login");   
+            }
+
+            else
+            {*/
+                List<Student> studentData = dbObject.Students.ToList();
+                return View(studentData);
+            //}            
         }
 
+        
 
         [HttpGet]
+        
         public ActionResult Login()
         {
-
+           
+           
             return View();
         }
 
         [HttpPost]
        
         public ActionResult Login(User userObject)
-        {            
-
+        {
+            /*var Username = dbObject.Users.Where(model => model.UserName == userObject.UserName).FirstOrDefault();
+            var password = dbObject.Users.Where(model => model.Password == userObject.Password).FirstOrDefault();*/
             var credentials = dbObject.Users.Where(model => model.UserName == userObject.UserName && model.Password == userObject.Password).FirstOrDefault();
 
-           if(credentials == null)
+
+            if (ModelState.IsValid)
             {
-                
+                if(credentials != null)
+                {
+                    Session["Username"] = credentials.UserName;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid User.");   
+                    return View(userObject);
+                }
+            }
+            else
+            {
+                return View(userObject);
+            }
+
+
+
+
+           /* if (credentials == null)
+            {
                 return View();
             }
             else
             {
                 Session["Username"] = userObject.UserName;
                 return RedirectToAction("Index");
+            }*/
+
+           /* if (!ModelState.IsValid)
+            {
+                return View(userObject);
             }
+            else
+            {
+                Session["Username"] = ;
+                return RedirectToAction("Index");
+            } */
+
         }
 
         public ActionResult Error()
@@ -54,90 +103,118 @@ namespace SessionPracice.Controllers
         }
 
 
+        [CustomAuthenticationFilter]
         [HttpGet]
         public ActionResult Create()
         {
-            // ->   1st Method DropDown with Enumerable
-
-            /* List<GenderTable> genderList = dbObject.GenderTables.ToList();
-             ViewBag.genderList = new SelectList(genderList, "GenderId", "GenderType");
- 
-            List<StandardTable> listOfStandard = dbObject.StandardTables.ToList();
-            ViewBag.listOfStandard = new SelectList(listOfStandard, "StandardId", "Standard");
-         --------------------------------------------------------------------------------------------
-             */
-
-
-            // ->   2nd Method of DropDown : 
-            // List<GenderTable> genderList = new List<GenderTable>();
-
-
-            // List<GenderTable> genderList = dbObject.GenderTables.ToList();
-            /*var genderList = dbObject.GenderTables.ToList();
-            if (genderList != null)
+           /* if (Session["Username"] == null)
             {
-                ViewBag.genderList = genderList;
-            }*/
+                return RedirectToAction("Login");
+            }
 
-            // List<GenderTable> standardList = dbObject.GenderTables.ToList();
-            /*var standardList = dbObject.StandardTables.ToList();
-            if (standardList != null)
-            {
-                ViewBag.standardList = standardList;
-            }*/
+            else
+            {*/
+                return View();
+           // }
+
+                // ->   1st Method DropDown with Enumerable
+
+                /* List<GenderTable> genderList = dbObject.GenderTables.ToList();
+                 ViewBag.genderList = new SelectList(genderList, "GenderId", "GenderType");
+
+                List<StandardTable> listOfStandard = dbObject.StandardTables.ToList();
+                ViewBag.listOfStandard = new SelectList(listOfStandard, "StandardId", "Standard");
+             --------------------------------------------------------------------------------------------
+                 */
 
 
-            return View();
+                // ->   2nd Method of DropDown : 
+                // List<GenderTable> genderList = new List<GenderTable>();
+
+
+                // List<GenderTable> genderList = dbObject.GenderTables.ToList();
+                /*var genderList = dbObject.GenderTables.ToList();
+                if (genderList != null)
+                {
+                    ViewBag.genderList = genderList;
+                }*/
+
+                // List<GenderTable> standardList = dbObject.GenderTables.ToList();
+                /*var standardList = dbObject.StandardTables.ToList();
+                if (standardList != null)
+                {
+                    ViewBag.standardList = standardList;
+                }*/
+
+
+               
         }
 
+      
         [HttpPost]
         public ActionResult Create(Student studentObject)
         {
-            dbObject.Students.Add(studentObject);
+           /* if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login");
+            }
 
-            dbObject.SaveChanges();
-            //int rowOfData = dbObject.SaveChanges();
+            else
+            {*/
+                dbObject.Students.Add(studentObject);
 
-            /* if(rowOfData > 0)
-             {
-                 TempData["Created"] = "<script>alert('Student Data Inserted Successfully.')</script>";
-              }*/
+                dbObject.SaveChanges();
+                //int rowOfData = dbObject.SaveChanges();
 
-            return RedirectToAction("Index");
+                /* if(rowOfData > 0)
+                 {
+                     TempData["Created"] = "<script>alert('Student Data Inserted Successfully.')</script>";
+                  }*/
+
+                return RedirectToAction("Index");
+            //} 
         }
 
-
+        [CustomAuthenticationFilter]
         [HttpGet]
         public ActionResult Edit(int id)
         {
 
-
-
-            // ->   1st Method DropDown with Enumerable : 
-            /* List<GenderTable> genderList = dbObject.GenderTables.ToList();
-             ViewBag.genderList = new SelectList(genderList, "GenderId", "GenderType");
-
-            // ->   2nd Method of DropDown : 
-             List<StandardTable> listOfStandard = dbObject.StandardTables.ToList();
-             ViewBag.listOfStandard = new SelectList(listOfStandard, "StandardId", "Standard");*/
-
-            // List<GenderTable> genderList = dbObject.GenderTables.ToList();
-            /*var genderList = dbObject.GenderTables.ToList();
-            if (genderList != null)
+            /*if (Session["Username"] == null)
             {
-                ViewBag.genderList = genderList;
+                return RedirectToAction("Login");
             }
 
-            // List<GenderTable> standardList = dbObject.GenderTables.ToList();
-            var standardList = dbObject.StandardTables.ToList();
-            if (standardList != null)
-            {
-                ViewBag.standardList = standardList;
-            }*/
+            else
+            {*/
+                var data = dbObject.Students.Where(x => x.Id == id).FirstOrDefault();
 
-            var data = dbObject.Students.Where(x => x.Id == id).FirstOrDefault();
+                return View(data);
+           // }
 
-            return View(data);
+                // ->   1st Method DropDown with Enumerable : 
+                /* List<GenderTable> genderList = dbObject.GenderTables.ToList();
+                 ViewBag.genderList = new SelectList(genderList, "GenderId", "GenderType");
+
+                // ->   2nd Method of DropDown : 
+                 List<StandardTable> listOfStandard = dbObject.StandardTables.ToList();
+                 ViewBag.listOfStandard = new SelectList(listOfStandard, "StandardId", "Standard");*/
+
+                // List<GenderTable> genderList = dbObject.GenderTables.ToList();
+                /*var genderList = dbObject.GenderTables.ToList();
+                if (genderList != null)
+                {
+                    ViewBag.genderList = genderList;
+                }
+
+                // List<GenderTable> standardList = dbObject.GenderTables.ToList();
+                var standardList = dbObject.StandardTables.ToList();
+                if (standardList != null)
+                {
+                    ViewBag.standardList = standardList;
+                }*/
+
+               
         }
 
         [HttpPost]
@@ -164,6 +241,7 @@ namespace SessionPracice.Controllers
             return RedirectToAction("Index");
         }
 
+       [CustomAuthenticationFilter]
         [HttpGet]
         public ActionResult Details(int id)
         {

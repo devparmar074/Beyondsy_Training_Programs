@@ -4,6 +4,7 @@
     <EntitySetMapping Name="BarberShops">
       <EntityTypeMapping TypeName="BarberShopModel.BarberShop">
         <MappingFragment StoreEntitySet="BarberShop">
+          <ScalarProperty Name="ShopKey" ColumnName="ShopKey" />
           <ScalarProperty Name="ShopPassword" ColumnName="ShopPassword" />
           <ScalarProperty Name="ShopCity" ColumnName="ShopCity" />
           <ScalarProperty Name="ShopAddress" ColumnName="ShopAddress" />
