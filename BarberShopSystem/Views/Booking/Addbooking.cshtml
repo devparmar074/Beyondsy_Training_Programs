@@ -1,0 +1,89 @@
+﻿@model BarberShopSystem.Models.Booking
+
+@{
+    ViewBag.Title = "Addbooking";
+}
+
+@*@Html.Hidden("ShopID")*@
+
+@Html.HiddenFor(x=> x.ShopId)
+@Html.HiddenFor(x=>x.UserId)
+
+<h2>Addbooking</h2>
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+@using (Html.BeginForm( new { id = ViewBag.ShopId,uid = ViewBag.UserId }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Booking</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<div>
+    @Html.Hidden("ShopID", null, new { id = "ShopId" })
+    @Html.Hidden("UserId", null, new { id = "UserId" })
+</div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BookingDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.BookingDate, new { htmlAttributes = new { @class = "datepicker" } })
+            @Html.ValidationMessageFor(model => model.BookingDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <lable>Please Select : </lable>
+        <div class="form-group">
+            @Html.DropDownListFor(model => model.ServiceId, (IEnumerable<SelectListItem>)ViewBag.serviceList, "Select Service")
+        </div>
+    </div>
+
+    <div class="form-group">
+        <lable>Please Select : </lable>
+        <div class="form-group">
+            @Html.DropDownListFor(model => model.HairStylistId, (IEnumerable<SelectListItem>)ViewBag.hairStylistList, "Select HairStylist")
+
+        </div>
+    </div>
+
+
+  @*  <div>
+
+        @ViewBag.ShopId
+        @ViewBag.UserId
+       
+    </div>*@
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Book" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+
+   @* <div>
+        @Html.ActionLink("Book Now", "GetBookingById", new {id = model.ShopId} ,null)
+    </div>*@
+}
+
+
+<script src="~/Scripts/jquery-ui-1.13.2.min.js"></script>
+
+
+@section Scripts {
+
+
+    <script>
+        $(document).ready(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "dd-mm-yy",
+                changemonth: true,
+                changeyear: true
+            });
+        });
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

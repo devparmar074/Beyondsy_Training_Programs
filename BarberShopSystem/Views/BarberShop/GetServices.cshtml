@@ -1,0 +1,52 @@
+﻿@model IEnumerable<BarberShopSystem.Models.BarberShopService>
+
+@{
+    ViewBag.Title = "GetServices";
+}
+
+<h2>GetServices</h2>
+
+<p>
+   
+
+</p>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServicePrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BarberShop.ShopName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServiceName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServicePrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BarberShop.ShopName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ShopId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ShopId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ShopId })
+        </td>
+    </tr>
+    <tr>
+        
+        @Html.ActionLink("Add New Service", "AddService", new { id = item.ShopId }, null)
+    </tr>
+}
+
+</table>

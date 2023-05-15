@@ -1,0 +1,280 @@
+.products {
+            width: 100%;
+            font-family: Raleway;
+            flex-direction: column;
+            display: flex;
+        }
+
+        .product {
+            width: calc(24% - 13px);
+            margin: 10px 10px 30px 10px;
+            vertical-align: top;
+        }
+
+        .product-content {
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .product ul {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 10px 0 0 0;
+        }
+
+            .product ul small {
+                display: block;
+                font-size: 15px;
+                font-weight: 300;
+                font-style: italic;
+                margin: 7px 0 0 0;
+            }
+
+        .product .product-text {
+            margin: 7px 0 0 0;
+            color: #777;
+        }
+
+        .product .price {
+            font-family: sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .product .genre {
+            font-size: 14px;
+        }
+
+        .product ul {
+        }
+
+        .product section {
+            justify-content: right;
+            display: block;
+            font-size: 15px;
+            font-weight: 250;
+            font-style: italic;
+            margin: 7px 0 0 0;
+        }
+
+        .form-group {
+            margin: 200px;
+            margin-right: 0px;
+            padding-left: 400px;
+            margin-top: 0px;
+            padding-top: 5px;
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+        }
+        .opentime {
+            margin: 200px;
+            margin-right: 0px;
+            padding-left: 100px;
+            margin-top: 3px;
+            padding-top: 5px;
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+            font-size: 9px;
+            font-weight: 150;
+            font-style: italic;
+        }
+
+        .closetime {
+            margin: 200px;
+            margin-right: 0px;
+            padding-left: 100px;
+            margin-top: 3px;
+            padding-top: 5px;
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+            font-size: 9px;
+            font-weight: 150;
+            font-style: italic;
+        }
+
+        .lbl {
+            font-size: 13px;
+            font-weight: 200;
+            font-style: italic;
+        }
+
+------------------------------------------------------------
+
+
+ <!--@foreach (var item in Model)
+    {
+        <div class="product">
+
+            <div class="product-content">
+                <ul>-->
+                    @item.ShopName
+                    <!--<small>@item.ShopCity</small>
+                    <lable class="lbl">OpenTime : </lable>
+                    <small class="opentime">@item.OpenTime</small>
+                    <lable class="lbl"> CloseTime : </lable>
+                    <small class="closetime">@item.CloseTime</small>
+
+                    <section>
+                        @Html.ActionLink("Book Now", "Addbooking", "Booking", new { id = item.ShopId, uid = item.UserId }, null)
+                    </section>
+
+                </ul>-->
+                @* <p class="product-text price">@item</p>
+                    <p class="product-text genre">@item.</p>*@
+            <!--</div>
+
+
+            <div>
+
+                <div>
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }-->-----------------------------------------------------
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ShopName)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.OpenTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CloseTime)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.ShopAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShopCity)
+        </th>               
+        
+       @* <th>
+            @Html.DisplayNameFor(model => model.BarberShopService.ServiceName)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.ShopName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OpenTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CloseTime)
+        </td>
+       
+
+        <td>
+            @Html.DisplayFor(modelItem => item.ShopAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShopCity)
+        </td>
+       
+               
+       @* <td>
+            @Html.DisplayFor(modelItem => item.BarberShopService.ServiceName)
+        </td>*@
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ShopId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ShopId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ShopId })
+        </td>*@
+
+        <td>
+            @Html.ActionLink("Book Now","Addbooking","Booking", new { id = item.ShopId, uid = item.UserId }, null)
+        </td>
+    </tr>
+}
+
+</table>
+------------------------------------------------------------
+ <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ShopName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpenTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CloseTime)
+            </th>
+
+
+            @* <th>
+                    @Html.DisplayNameFor(model => model.ShopAddress)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.ShopCity)
+            </th>
+
+
+            @*<th>
+                    @Html.DisplayNameFor(model => model.ServiceId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BarberShopService.ServiceName)
+                </th>*@
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShopName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpenTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CloseTime)
+                </td>
+
+
+                @* <td>
+                        @Html.DisplayFor(modelItem => item.ShopAddress)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShopCity)
+                </td>
+
+
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.ServiceId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BarberShopService.ServiceName)
+                    </td>*@
+
+
+                @* <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ShopId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ShopId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ShopId })
+                    </td>*@
+                <td>
+                    @Html.ActionLink("Open Salon", "ShopDetails", new { id = item.ShopId }, null)
+                </td>
+            </tr>
+        }
+
+    </table>

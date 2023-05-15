@@ -23,6 +23,7 @@ namespace BarberShopSystem.Models
         public Nullable<bool> PaymentStatus { get; set; }
         public Nullable<decimal> Amount { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> ServiceId { get; set; }
     
         public virtual BarberShop BarberShop { get; set; }
         public virtual Booking Booking { get; set; }

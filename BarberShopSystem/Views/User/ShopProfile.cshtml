@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<BarberShopSystem.Models.BarberShop>
 
+@*@model IEnumerable< BarberShopSystem.Models.ViewModel.BarberShopAndBarberService>*@
+
+@*@model BarberShopSystem.Models.ViewModel.UserReg*@
+
 @{
     ViewBag.Title = "ShopProfile";
 }
@@ -12,12 +16,22 @@
 </p>
 
 <p>
-    <span>@Html.ActionLink("Shops Hairstylists", "GetHairStylists","HairStylist")</span>
+    <span>@Html.ActionLink("Shops Hairstylists", "GetHairStylists", "HairStylist")</span>
 </p>
+
+<p>
+    <span>@Html.ActionLink("Shop Services", "GetServices", "BarberShop")</span>
+</p>
+
+@*<p>
+    HI,
+    @Session["UserModel"]
+</p>*@
+
 <table class="table">
     <tr>
 
-       @* <th>
+        @* <th>
             @Html.DisplayNameFor(model => model.UserId)
         </th>*@
 
@@ -25,7 +39,7 @@
             @Html.DisplayNameFor(model => model.ShopName)
         </th>
 
-        
+
 
         <th>
             @Html.DisplayNameFor(model => model.ShopAddress)
@@ -33,6 +47,10 @@
         <th>
             @Html.DisplayNameFor(model => model.ShopCity)
         </th>
+
+       
+
+
         <th>
             @Html.DisplayNameFor(model => model.OpenTime)
         </th>
@@ -49,7 +67,7 @@
 
 @foreach (var item in Model) {
     <tr>
-       @* <td>
+        @* <td>
             @Html.DisplayFor(modelItem => item.UserId)
         </td>*@
 
@@ -63,6 +81,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.ShopCity)
         </td>
+
+       
+
+
         <td>
             @Html.DisplayFor(modelItem => item.OpenTime)
         </td>
@@ -72,12 +94,16 @@
         <td>
             @Html.DisplayFor(modelItem => item.Status)
         </td>
-       
+
 
         <td>
             @Html.ActionLink("Edit", "UpdateShopProfile", new { id = item.ShopId }) |
-            
-            @Html.ActionLink("Delete", "DeleteShopData", new { id = item.ShopId })
+
+            @Html.ActionLink("Delete", "DeleteShopData", new { id = item.ShopId })  |
+
+            @Html.ActionLink("Hairstylists", "GetHairStylistByShopId", "HairStylist", new { id = item.ShopId }, null) |
+
+            @Html.ActionLink("Services", "GetServiceByShopId", "BarberShop", new { id = item.ShopId }, null)
         </td>
     </tr>
 }

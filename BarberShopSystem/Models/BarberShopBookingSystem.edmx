@@ -1,0 +1,958 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BarberShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BarberShop">
+          <Key>
+            <PropertyRef Name="ShopId" />
+          </Key>
+          <Property Name="ShopId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ServiceId" Type="int" />
+          <Property Name="ShopKey" Type="varchar" MaxLength="50" />
+          <Property Name="ShopName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShopAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShopCity" Type="nvarchar" MaxLength="50" />
+          <Property Name="OpenTime" Type="datetime" />
+          <Property Name="CloseTime" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="ShopPassword" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="BarberShopService">
+          <Key>
+            <PropertyRef Name="ServiceId" />
+          </Key>
+          <Property Name="ServiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShopId" Type="int" />
+          <Property Name="ServiceName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ServicePrice" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="BookingId" />
+          </Key>
+          <Property Name="BookingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShopId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="HairStylistId" Type="int" />
+          <Property Name="ServiceId" Type="int" />
+          <Property Name="HaircutId" Type="int" />
+          <Property Name="CreatedTime" Type="datetime" />
+          <Property Name="BookingDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Haircut">
+          <Key>
+            <PropertyRef Name="HaircutId" />
+          </Key>
+          <Property Name="HaircutId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HairStylistId" Type="int" />
+          <Property Name="ShopId" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="HaircutType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HairStylist">
+          <Key>
+            <PropertyRef Name="HairStylistId" />
+          </Key>
+          <Property Name="HairStylistId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShopId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nchar" MaxLength="10" />
+          <Property Name="Experience" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BarberShop.dbo.Payment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="BookingId" />
+            <PropertyRef Name="ShopId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="BookingId" Type="int" Nullable="false" />
+          <Property Name="ShopId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="DiscountCouponId" Type="nvarchar" MaxLength="50" />
+          <Property Name="PaymentMethod" Type="nvarchar" MaxLength="50" />
+          <Property Name="TransactionId" Type="int" />
+          <Property Name="PaymentStatus" Type="bit" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ServiceId" Type="int" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ReviewId" />
+          </Key>
+          <Property Name="ReviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ShopId" Type="int" />
+          <Property Name="ReviewDescription" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserTypeId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="Birthdate" Type="datetime" />
+          <Property Name="IsMobileVerified" Type="bit" />
+          <Property Name="CreatedDate" Type="date" />
+        </EntityType>
+        <EntityType Name="UserTypes2">
+          <Key>
+            <PropertyRef Name="UserTypeId" />
+          </Key>
+          <Property Name="UserTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_BarberShop_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="BarberShop" Type="Self.BarberShop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="BarberShop">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BarberShopService_BarberShop">
+          <End Role="BarberShop" Type="Self.BarberShop" Multiplicity="0..1" />
+          <End Role="BarberShopService" Type="Self.BarberShopService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BarberShop">
+              <PropertyRef Name="ShopId" />
+            </Principal>
+            <Dependent Role="BarberShopService">
+              <PropertyRef Name="ShopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_BarberShop">
+          <End Role="BarberShop" Type="Self.BarberShop" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BarberShop">
+              <PropertyRef Name="ShopId" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="ShopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_Haircut">
+          <End Role="Haircut" Type="Self.Haircut" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Haircut">
+              <PropertyRef Name="HaircutId" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="HaircutId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_HairStylist">
+          <End Role="HairStylist" Type="Self.HairStylist" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HairStylist">
+              <PropertyRef Name="HairStylistId" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="HairStylistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Haircut_BarberShop">
+          <End Role="BarberShop" Type="Self.BarberShop" Multiplicity="0..1" />
+          <End Role="Haircut" Type="Self.Haircut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BarberShop">
+              <PropertyRef Name="ShopId" />
+            </Principal>
+            <Dependent Role="Haircut">
+              <PropertyRef Name="ShopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Haircut_HairStylist">
+          <End Role="HairStylist" Type="Self.HairStylist" Multiplicity="0..1" />
+          <End Role="Haircut" Type="Self.Haircut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HairStylist">
+              <PropertyRef Name="HairStylistId" />
+            </Principal>
+            <Dependent Role="Haircut">
+              <PropertyRef Name="HairStylistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HairStylist_BarberShop">
+          <End Role="BarberShop" Type="Self.BarberShop" Multiplicity="1" />
+          <End Role="HairStylist" Type="Self.HairStylist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BarberShop">
+              <PropertyRef Name="ShopId" />
+            </Principal>
+            <Dependent Role="HairStylist">
+              <PropertyRef Name="ShopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_BarberShop">
+          <End Role="BarberShop" Type="Self.BarberShop" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BarberShop">
+              <PropertyRef Name="ShopId" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="ShopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Booking">
+          <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="BookingId" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="BookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_BarberShop">
+          <End Role="BarberShop" Type="Self.BarberShop" Multiplicity="0..1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BarberShop">
+              <PropertyRef Name="ShopId" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="ShopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserTypes2">
+          <End Role="UserTypes2" Type="Self.UserTypes2" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTypes2">
+              <PropertyRef Name="UserTypeId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BarberShopModelStoreContainer">
+          <EntitySet Name="BarberShop" EntityType="Self.BarberShop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BarberShopService" EntityType="Self.BarberShopService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Haircut" EntityType="Self.Haircut" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HairStylist" EntityType="Self.HairStylist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTypes2" EntityType="Self.UserTypes2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Payment].[BookingId] AS [BookingId], 
+    [Payment].[ShopId] AS [ShopId], 
+    [Payment].[UserId] AS [UserId], 
+    [Payment].[DiscountCouponId] AS [DiscountCouponId], 
+    [Payment].[PaymentMethod] AS [PaymentMethod], 
+    [Payment].[TransactionId] AS [TransactionId], 
+    [Payment].[PaymentStatus] AS [PaymentStatus], 
+    [Payment].[Amount] AS [Amount], 
+    [Payment].[CreatedDate] AS [CreatedDate], 
+    [Payment].[ServiceId] AS [ServiceId]
+    FROM [dbo].[Payment] AS [Payment]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_BarberShop_User1" Association="Self.FK_BarberShop_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="BarberShop" EntitySet="BarberShop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BarberShopService_BarberShop" Association="Self.FK_BarberShopService_BarberShop">
+            <End Role="BarberShop" EntitySet="BarberShop" />
+            <End Role="BarberShopService" EntitySet="BarberShopService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_BarberShop" Association="Self.FK_Booking_BarberShop">
+            <End Role="BarberShop" EntitySet="BarberShop" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_Haircut" Association="Self.FK_Booking_Haircut">
+            <End Role="Haircut" EntitySet="Haircut" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_HairStylist" Association="Self.FK_Booking_HairStylist">
+            <End Role="HairStylist" EntitySet="HairStylist" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_User1" Association="Self.FK_Booking_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Haircut_BarberShop" Association="Self.FK_Haircut_BarberShop">
+            <End Role="BarberShop" EntitySet="BarberShop" />
+            <End Role="Haircut" EntitySet="Haircut" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Haircut_HairStylist" Association="Self.FK_Haircut_HairStylist">
+            <End Role="HairStylist" EntitySet="HairStylist" />
+            <End Role="Haircut" EntitySet="Haircut" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HairStylist_BarberShop" Association="Self.FK_HairStylist_BarberShop">
+            <End Role="BarberShop" EntitySet="BarberShop" />
+            <End Role="HairStylist" EntitySet="HairStylist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_BarberShop" Association="Self.FK_Payment_BarberShop">
+            <End Role="BarberShop" EntitySet="BarberShop" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Booking" Association="Self.FK_Payment_Booking">
+            <End Role="Booking" EntitySet="Booking" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_User1" Association="Self.FK_Payment_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_BarberShop" Association="Self.FK_Review_BarberShop">
+            <End Role="BarberShop" EntitySet="BarberShop" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_User1" Association="Self.FK_Review_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserTypes2" Association="Self.FK_User_UserTypes2">
+            <End Role="UserTypes2" EntitySet="UserTypes2" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BarberShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BarberShop">
+          <Key>
+            <PropertyRef Name="ShopId" />
+          </Key>
+          <Property Name="ShopId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ServiceId" Type="Int32" />
+          <Property Name="ShopKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ShopName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShopAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShopCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OpenTime" Type="DateTime" Precision="3" />
+          <Property Name="CloseTime" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="ShopPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_BarberShop_User1" FromRole="BarberShop" ToRole="User" />
+          <NavigationProperty Name="BarberShopServices" Relationship="Self.FK_BarberShopService_BarberShop" FromRole="BarberShop" ToRole="BarberShopService" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_BarberShop" FromRole="BarberShop" ToRole="Booking" />
+          <NavigationProperty Name="Haircuts" Relationship="Self.FK_Haircut_BarberShop" FromRole="BarberShop" ToRole="Haircut" />
+          <NavigationProperty Name="HairStylists" Relationship="Self.FK_HairStylist_BarberShop" FromRole="BarberShop" ToRole="HairStylist" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_BarberShop" FromRole="BarberShop" ToRole="Payment" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK_Review_BarberShop" FromRole="BarberShop" ToRole="Review" />
+        </EntityType>
+        <EntityType Name="BarberShopService">
+          <Key>
+            <PropertyRef Name="ServiceId" />
+          </Key>
+          <Property Name="ServiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShopId" Type="Int32" />
+          <Property Name="ServiceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ServicePrice" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="BarberShop" Relationship="Self.FK_BarberShopService_BarberShop" FromRole="BarberShopService" ToRole="BarberShop" />
+        </EntityType>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="BookingId" />
+          </Key>
+          <Property Name="BookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShopId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="HairStylistId" Type="Int32" />
+          <Property Name="ServiceId" Type="Int32" />
+          <Property Name="HaircutId" Type="Int32" />
+          <Property Name="CreatedTime" Type="DateTime" Precision="3" />
+          <Property Name="BookingDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BarberShop" Relationship="Self.FK_Booking_BarberShop" FromRole="Booking" ToRole="BarberShop" />
+          <NavigationProperty Name="Haircut" Relationship="Self.FK_Booking_Haircut" FromRole="Booking" ToRole="Haircut" />
+          <NavigationProperty Name="HairStylist" Relationship="Self.FK_Booking_HairStylist" FromRole="Booking" ToRole="HairStylist" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Booking_User1" FromRole="Booking" ToRole="User" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_Booking" FromRole="Booking" ToRole="Payment" />
+        </EntityType>
+        <EntityType Name="Haircut">
+          <Key>
+            <PropertyRef Name="HaircutId" />
+          </Key>
+          <Property Name="HaircutId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HairStylistId" Type="Int32" />
+          <Property Name="ShopId" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HaircutType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BarberShop" Relationship="Self.FK_Haircut_BarberShop" FromRole="Haircut" ToRole="BarberShop" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_Haircut" FromRole="Haircut" ToRole="Booking" />
+          <NavigationProperty Name="HairStylist" Relationship="Self.FK_Haircut_HairStylist" FromRole="Haircut" ToRole="HairStylist" />
+        </EntityType>
+        <EntityType Name="HairStylist">
+          <Key>
+            <PropertyRef Name="HairStylistId" />
+          </Key>
+          <Property Name="HairStylistId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShopId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Experience" Type="Int32" />
+          <NavigationProperty Name="BarberShop" Relationship="Self.FK_HairStylist_BarberShop" FromRole="HairStylist" ToRole="BarberShop" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_HairStylist" FromRole="HairStylist" ToRole="Booking" />
+          <NavigationProperty Name="Haircuts" Relationship="Self.FK_Haircut_HairStylist" FromRole="HairStylist" ToRole="Haircut" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ReviewId" />
+          </Key>
+          <Property Name="ReviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ShopId" Type="Int32" />
+          <Property Name="ReviewDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BarberShop" Relationship="Self.FK_Review_BarberShop" FromRole="Review" ToRole="BarberShop" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Review_User1" FromRole="Review" ToRole="User" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Birthdate" Type="DateTime" Precision="3" />
+          <Property Name="IsMobileVerified" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="BarberShops" Relationship="Self.FK_BarberShop_User1" FromRole="User" ToRole="BarberShop" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_User1" FromRole="User" ToRole="Booking" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK_Review_User1" FromRole="User" ToRole="Review" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_User1" FromRole="User" ToRole="Payment" />
+          <NavigationProperty Name="UserTypes2" Relationship="Self.FK_User_UserTypes2" FromRole="User" ToRole="UserTypes2" />
+        </EntityType>
+        <EntityType Name="UserTypes2">
+          <Key>
+            <PropertyRef Name="UserTypeId" />
+          </Key>
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_UserTypes2" FromRole="UserTypes2" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="BookingId" />
+            <PropertyRef Name="ShopId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="BookingId" Type="Int32" Nullable="false" />
+          <Property Name="ShopId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="DiscountCouponId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionId" Type="Int32" />
+          <Property Name="PaymentStatus" Type="Boolean" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ServiceId" Type="Int32" />
+          <NavigationProperty Name="BarberShop" Relationship="Self.FK_Payment_BarberShop" FromRole="Payment" ToRole="BarberShop" />
+          <NavigationProperty Name="Booking" Relationship="Self.FK_Payment_Booking" FromRole="Payment" ToRole="Booking" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Payment_User1" FromRole="Payment" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_BarberShop_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="BarberShop" Type="Self.BarberShop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="BarberShop">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BarberShopService_BarberShop">
+          <End Role="BarberShop" Type="Self.BarberShop" Multiplicity="0..1" />
+          <End Role="BarberShopService" Type="Self.BarberShopService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BarberShop">
+              <PropertyRef Name="ShopId" />
+            </Principal>
+            <Dependent Role="BarberShopService">
+              <PropertyRef Name="ShopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_BarberShop">
+          <End Role="BarberShop" Type="Self.BarberShop" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BarberShop">
+              <PropertyRef Name="ShopId" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="ShopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Haircut_BarberShop">
+          <End Role="BarberShop" Type="Self.BarberShop" Multiplicity="0..1" />
+          <End Role="Haircut" Type="Self.Haircut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BarberShop">
+              <PropertyRef Name="ShopId" />
+            </Principal>
+            <Dependent Role="Haircut">
+              <PropertyRef Name="ShopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HairStylist_BarberShop">
+          <End Role="BarberShop" Type="Self.BarberShop" Multiplicity="1" />
+          <End Role="HairStylist" Type="Self.HairStylist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BarberShop">
+              <PropertyRef Name="ShopId" />
+            </Principal>
+            <Dependent Role="HairStylist">
+              <PropertyRef Name="ShopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_BarberShop">
+          <End Role="BarberShop" Type="Self.BarberShop" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BarberShop">
+              <PropertyRef Name="ShopId" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="ShopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_BarberShop">
+          <End Role="BarberShop" Type="Self.BarberShop" Multiplicity="0..1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BarberShop">
+              <PropertyRef Name="ShopId" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="ShopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_Haircut">
+          <End Role="Haircut" Type="Self.Haircut" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Haircut">
+              <PropertyRef Name="HaircutId" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="HaircutId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_HairStylist">
+          <End Role="HairStylist" Type="Self.HairStylist" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HairStylist">
+              <PropertyRef Name="HairStylistId" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="HairStylistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Booking">
+          <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="BookingId" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="BookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Haircut_HairStylist">
+          <End Role="HairStylist" Type="Self.HairStylist" Multiplicity="0..1" />
+          <End Role="Haircut" Type="Self.Haircut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HairStylist">
+              <PropertyRef Name="HairStylistId" />
+            </Principal>
+            <Dependent Role="Haircut">
+              <PropertyRef Name="HairStylistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserTypes2">
+          <End Role="UserTypes2" Type="Self.UserTypes2" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTypes2">
+              <PropertyRef Name="UserTypeId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BarberShopEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BarberShops" EntityType="Self.BarberShop" />
+          <EntitySet Name="BarberShopServices" EntityType="Self.BarberShopService" />
+          <EntitySet Name="Bookings" EntityType="Self.Booking" />
+          <EntitySet Name="Haircuts" EntityType="Self.Haircut" />
+          <EntitySet Name="HairStylists" EntityType="Self.HairStylist" />
+          <EntitySet Name="Reviews" EntityType="Self.Review" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserTypes2" EntityType="Self.UserTypes2" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <AssociationSet Name="FK_BarberShop_User1" Association="Self.FK_BarberShop_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="BarberShop" EntitySet="BarberShops" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BarberShopService_BarberShop" Association="Self.FK_BarberShopService_BarberShop">
+            <End Role="BarberShop" EntitySet="BarberShops" />
+            <End Role="BarberShopService" EntitySet="BarberShopServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_BarberShop" Association="Self.FK_Booking_BarberShop">
+            <End Role="BarberShop" EntitySet="BarberShops" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Haircut_BarberShop" Association="Self.FK_Haircut_BarberShop">
+            <End Role="BarberShop" EntitySet="BarberShops" />
+            <End Role="Haircut" EntitySet="Haircuts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HairStylist_BarberShop" Association="Self.FK_HairStylist_BarberShop">
+            <End Role="BarberShop" EntitySet="BarberShops" />
+            <End Role="HairStylist" EntitySet="HairStylists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_BarberShop" Association="Self.FK_Payment_BarberShop">
+            <End Role="BarberShop" EntitySet="BarberShops" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_BarberShop" Association="Self.FK_Review_BarberShop">
+            <End Role="BarberShop" EntitySet="BarberShops" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_Haircut" Association="Self.FK_Booking_Haircut">
+            <End Role="Haircut" EntitySet="Haircuts" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_HairStylist" Association="Self.FK_Booking_HairStylist">
+            <End Role="HairStylist" EntitySet="HairStylists" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_User1" Association="Self.FK_Booking_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Booking" Association="Self.FK_Payment_Booking">
+            <End Role="Booking" EntitySet="Bookings" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Haircut_HairStylist" Association="Self.FK_Haircut_HairStylist">
+            <End Role="HairStylist" EntitySet="HairStylists" />
+            <End Role="Haircut" EntitySet="Haircuts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_User1" Association="Self.FK_Review_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_User1" Association="Self.FK_Payment_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserTypes2" Association="Self.FK_User_UserTypes2">
+            <End Role="UserTypes2" EntitySet="UserTypes2" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BarberShopModelStoreContainer" CdmEntityContainer="BarberShopEntities3">
+          <EntitySetMapping Name="BarberShops">
+            <EntityTypeMapping TypeName="BarberShopModel.BarberShop">
+              <MappingFragment StoreEntitySet="BarberShop">
+                <ScalarProperty Name="ShopId" ColumnName="ShopId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="ShopKey" ColumnName="ShopKey" />
+                <ScalarProperty Name="ShopName" ColumnName="ShopName" />
+                <ScalarProperty Name="ShopAddress" ColumnName="ShopAddress" />
+                <ScalarProperty Name="ShopCity" ColumnName="ShopCity" />
+                <ScalarProperty Name="OpenTime" ColumnName="OpenTime" />
+                <ScalarProperty Name="CloseTime" ColumnName="CloseTime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ShopPassword" ColumnName="ShopPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BarberShopServices">
+            <EntityTypeMapping TypeName="BarberShopModel.BarberShopService">
+              <MappingFragment StoreEntitySet="BarberShopService">
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="ShopId" ColumnName="ShopId" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="ServicePrice" ColumnName="ServicePrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bookings">
+            <EntityTypeMapping TypeName="BarberShopModel.Booking">
+              <MappingFragment StoreEntitySet="Booking">
+                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+                <ScalarProperty Name="ShopId" ColumnName="ShopId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="HairStylistId" ColumnName="HairStylistId" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="HaircutId" ColumnName="HaircutId" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Haircuts">
+            <EntityTypeMapping TypeName="BarberShopModel.Haircut">
+              <MappingFragment StoreEntitySet="Haircut">
+                <ScalarProperty Name="HaircutId" ColumnName="HaircutId" />
+                <ScalarProperty Name="HairStylistId" ColumnName="HairStylistId" />
+                <ScalarProperty Name="ShopId" ColumnName="ShopId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="HaircutType" ColumnName="HaircutType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HairStylists">
+            <EntityTypeMapping TypeName="BarberShopModel.HairStylist">
+              <MappingFragment StoreEntitySet="HairStylist">
+                <ScalarProperty Name="HairStylistId" ColumnName="HairStylistId" />
+                <ScalarProperty Name="ShopId" ColumnName="ShopId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="BarberShopModel.Review">
+              <MappingFragment StoreEntitySet="Review">
+                <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ShopId" ColumnName="ShopId" />
+                <ScalarProperty Name="ReviewDescription" ColumnName="ReviewDescription" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BarberShopModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BarberShopModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="IsMobileVerified" ColumnName="IsMobileVerified" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTypes2">
+            <EntityTypeMapping TypeName="BarberShopModel.UserTypes2">
+              <MappingFragment StoreEntitySet="UserTypes2">
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="BarberShopModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+                <ScalarProperty Name="ShopId" ColumnName="ShopId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DiscountCouponId" ColumnName="DiscountCouponId" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

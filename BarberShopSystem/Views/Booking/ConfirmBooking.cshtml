@@ -1,0 +1,68 @@
+﻿@model BarberShopSystem.Models.Booking
+
+
+
+@{
+    ViewBag.Title = "ConfirmBooking";
+}
+
+<h2>ConfirmBooking</h2>
+
+<div>
+    <h4>Booking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>
+            @Html.DisplayNameFor(model => model.)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceId)
+        </dd>*@
+
+        <dt>
+            <label>Your</label>
+            @Html.DisplayNameFor(model => model.User.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Name)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingDate)
+        </dd>
+
+
+
+        <dt>
+            <label>HairStylist</label>
+            @Html.DisplayNameFor(model => model.HairStylist.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HairStylist.Name)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedTime)
+        </dd>
+
+
+    </dl>
+</div>
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BookingId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

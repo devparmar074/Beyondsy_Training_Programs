@@ -4,6 +4,7 @@
     <EntitySetMapping Name="BarberShops">
       <EntityTypeMapping TypeName="BarberShopModel.BarberShop">
         <MappingFragment StoreEntitySet="BarberShop">
+          <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
           <ScalarProperty Name="ShopKey" ColumnName="ShopKey" />
           <ScalarProperty Name="ShopPassword" ColumnName="ShopPassword" />
           <ScalarProperty Name="ShopCity" ColumnName="ShopCity" />
@@ -20,6 +21,8 @@
     <EntitySetMapping Name="Bookings">
       <EntityTypeMapping TypeName="BarberShopModel.Booking">
         <MappingFragment StoreEntitySet="Booking">
+          <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+          <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
           <ScalarProperty Name="BookingId" ColumnName="BookingId" />
           <ScalarProperty Name="ShopId" ColumnName="ShopId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -103,6 +106,7 @@
     <EntitySetMapping Name="Payments">
       <EntityTypeMapping TypeName="BarberShopModel.Payment">
         <MappingFragment StoreEntitySet="Payment">
+          <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
           <ScalarProperty Name="BookingId" ColumnName="BookingId" />
           <ScalarProperty Name="ShopId" ColumnName="ShopId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -112,6 +116,15 @@
           <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
           <ScalarProperty Name="Amount" ColumnName="Amount" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BarberShopServices">
+      <EntityTypeMapping TypeName="BarberShopModel.BarberShopService">
+        <MappingFragment StoreEntitySet="BarberShopService">
+          <ScalarProperty Name="ServicePrice" ColumnName="ServicePrice" />
+          <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+          <ScalarProperty Name="ShopId" ColumnName="ShopId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

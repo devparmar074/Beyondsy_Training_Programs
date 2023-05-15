@@ -9,12 +9,27 @@ namespace BarberShopSystem.Controllers
 {
     public class HairStylistController : Controller
     {
-        BarberShopEntities2 dbObject = new BarberShopEntities2();
+        BarberShopEntities3 dbObject = new BarberShopEntities3();
 
-
+        [HttpGet]
         public ActionResult GetHairStylists()
         {
+
             List<HairStylist> hairStylistsList = dbObject.HairStylists.ToList();
+            return View(hairStylistsList);
+        }
+
+        [HttpGet]
+        public ActionResult GetHairStylistByShopId(int id)
+        {
+            List<HairStylist> hairStylistsList = dbObject.HairStylists.Where(x => x.ShopId == id).ToList();
+
+            //var hairStylistsListByShopId = hairStylistsList.FindAll(x => x.ShopId == id).FirstOrDefault();
+
+           // var hairStylist = dbObject.HairStylists.FirstOrDefault(x => x.ShopId == id);
+
+          // var hairStylistsList = dbObject.HairStylists.Where(x => x.ShopId == id ).FirstOrDefault();
+                       
             return View(hairStylistsList);
         }
 

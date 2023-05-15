@@ -54,6 +54,7 @@ namespace SessionPracice.Controllers
 
 
             if (ModelState.IsValid)
+
             {
                 if(credentials != null)
                 {
@@ -62,7 +63,7 @@ namespace SessionPracice.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid User.");   
+                    ModelState.AddModelError("", "Invalid.");   
                     return View(userObject);
                 }
             }
@@ -223,7 +224,7 @@ namespace SessionPracice.Controllers
             var data = dbObject.Students.Where(x => x.Id == studentObject.Id).FirstOrDefault();
 
             if (data != null)
-            {
+            { 
                 data.Name = studentObject.Name;
                 data.Email = studentObject.Email;
                 // data.Gender = studentObject.Gender;
@@ -248,7 +249,7 @@ namespace SessionPracice.Controllers
             var recordById = dbObject.Students.Where(x => x.Id == id).FirstOrDefault();
             return View(recordById);
         }
-
+        
 
 
         public ActionResult Delete(int id)

@@ -11,7 +11,8 @@ namespace BarberShopSystem.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HairStylist
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,11 +24,16 @@ namespace BarberShopSystem.Models
     
         public int HairStylistId { get; set; }
         public int ShopId { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Email { get; set; }
-        public string City { get; set; }
-        public Nullable<int> Experience { get; set; }
+        [Required]
         public string MobileNumber { get; set; }
+        [Required]
+        public string City { get; set; }
+        [Required]
+        public Nullable<int> Experience { get; set; }
     
         public virtual BarberShop BarberShop { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

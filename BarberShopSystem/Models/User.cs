@@ -11,7 +11,8 @@ namespace BarberShopSystem.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,15 +24,31 @@ namespace BarberShopSystem.Models
             this.Payments = new HashSet<Payment>();
         }
     
+
         public int UserId { get; set; }
         public int UserTypeId { get; set; }
+
+        [Required]
         public string Name { get; set; }
+
+        [Required]
         public string Email { get; set; }
+
+        [Required]
         public string MobileNumber { get; set; }
+
+        [Required]
         public string Password { get; set; }
+
+        [Required]
         public string Gender { get; set; }
+
+        [Required]
         public Nullable<System.DateTime> Birthdate { get; set; }
+
+        [Required]
         public Nullable<bool> IsMobileVerified { get; set; }
+        [Required]
         public Nullable<System.DateTime> CreatedDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

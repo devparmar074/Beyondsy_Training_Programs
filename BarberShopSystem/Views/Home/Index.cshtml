@@ -1,31 +1,235 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model IEnumerable<BarberShopSystem.Models.BarberShop>
+
+@*@model  BarberShopSystem.Models.ViewModel.BarberShopAndBarberService*@
+
+@{
+    ViewBag.Title = "Index";
 }
+<html>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<head>
+   
+    
+</head>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+<body>
+    <section class="hp-room-section">
+        <div class="container-fluid">
+            <div class="hp-room-items">
+                <div class="row">
+                    
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-lg-3 col-md-6">
+                                <div class="hp-room-item set-bg" data-setbg="Content/img/room/salon1.jpg">
+                                    <div class="hr-text">
+                                        <h3>@Html.DisplayFor(modelItem => item.ShopName)</h3>
+                                        <h2>@Html.DisplayFor(modelItem => item.ServiceId)</h2>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="r-o">Size:</td>
+                                                    <td>30 ft</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="r-o">Capacity:</td>
+                                                    <td>Max persion 5</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="r-o">Bed:</td>
+                                                    <td>King Beds</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="r-o">Services:</td>
+                                                    <td>Wifi, Television, Bathroom,...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <span class="primary-btn">@Html.ActionLink("More Details", "ShopDetails", new { id = item.ShopId }, null) </span>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                                
+                            
+                         }
+                          
+
+                            @*   <section class="hp-room-section">
+                <div class="container-fluid">
+                    <div class="hp-room-items">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="hp-room-item set-bg" data-setbg="img/room/room-b1.jpg">
+                                    <div class="hr-text">
+                                        <h3>Double Room</h3>
+                                        <h2>199$<span>/Pernight</span></h2>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="r-o">Size:</td>
+                                                    <td>30 ft</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="r-o">Capacity:</td>
+                                                    <td>Max persion 5</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="r-o">Bed:</td>
+                                                    <td>King Beds</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="r-o">Services:</td>
+                                                    <td>Wifi, Television, Bathroom,...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <a href="#" class="primary-btn">More Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="hp-room-item set-bg" data-setbg="img/room/room-b2.jpg">
+                                    <div class="hr-text">
+                                        <h3>Premium King Room</h3>
+                                        <h2>159$<span>/Pernight</span></h2>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="r-o">Size:</td>
+                                                    <td>30 ft</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="r-o">Capacity:</td>
+                                                    <td>Max persion 5</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="r-o">Bed:</td>
+                                                    <td>King Beds</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="r-o">Services:</td>
+                                                    <td>Wifi, Television, Bathroom,...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <a href="#" class="primary-btn">More Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="hp-room-item set-bg" data-setbg="img/room/room-b3.jpg">
+                                    <div class="hr-text">
+                                        <h3>Deluxe Room</h3>
+                                        <h2>198$<span>/Pernight</span></h2>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="r-o">Size:</td>
+                                                    <td>30 ft</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="r-o">Capacity:</td>
+                                                    <td>Max persion 5</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="r-o">Bed:</td>
+                                                    <td>King Beds</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="r-o">Services:</td>
+                                                    <td>Wifi, Television, Bathroom,...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <a href="#" class="primary-btn">More Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="hp-room-item set-bg" data-setbg="img/room/room-b4.jpg">
+                                    <div class="hr-text">
+                                        <h3>Family Room</h3>
+                                        <h2>299$<span>/Pernight</span></h2>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="r-o">Size:</td>
+                                                    <td>30 ft</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="r-o">Capacity:</td>
+                                                    <td>Max persion 5</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="r-o">Bed:</td>
+                                                    <td>King Beds</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="r-o">Services:</td>
+                                                    <td>Wifi, Television, Bathroom,...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <a href="#" class="primary-btn">More Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>*@
+
+                        </div>
+                </div>
+            </div>
+        </section>
+
+
+@*
+                    <h2>Barber Shops</h2>
+
+                    <h4> Available Shops</h4>
+
+                    <div>
+                        <div class="form-group">
+
+                            <div class="form-group">
+                                @Html.DropDownList("ShopId", (IEnumerable<SelectListItem>)ViewBag.cityList, "Select City")
+                            </div>
+                        </div>
+
+                    </div>*@
+
+                  @* @foreach (var item in Model)*@
+                    <!--{
+                        <div class="product">
+
+                            <div class="product-content">
+                                <ul>-->
+                                   @* @item.ShopName*@
+                                   @* <small>@item.ShopCity</small>*@
+                                    @*<section>
+                                        @Html.ActionLink("Open Salon", "ShopDetails", new { id = item.ShopId }, null)
+                                    </section>
+*@
+                              @*  </ul>-->*@
+                                @* <p class="product-text price">@item</p>
+                                <p class="product-text genre">@item.</p>*@
+                            <!--</div>
+
+                            <div>
+
+                            </div>
+                        </div>
+                    }-->
+
+
+
+</body>
+
+</html>
+
+
+
+

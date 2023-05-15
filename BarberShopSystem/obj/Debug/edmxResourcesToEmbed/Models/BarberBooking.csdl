@@ -20,6 +20,8 @@
     <Property Name="ShopCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ShopPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="ShopKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ServiceId" Type="Int32" />
+    <NavigationProperty Name="BarberShopService" Relationship="BarberShopModel.FK_BarberShopService_BarberShop" FromRole="BarberShop" ToRole="BarberShopService" />
   </EntityType>
   <EntityType Name="Booking">
     <Key>
@@ -36,6 +38,8 @@
     <NavigationProperty Name="HairStylist" Relationship="Self.FK_Booking_HairStylist" FromRole="Booking" ToRole="HairStylist" />
     <NavigationProperty Name="User" Relationship="Self.FK_Booking_User1" FromRole="Booking" ToRole="User" />
     <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_Booking" FromRole="Booking" ToRole="Payment" />
+    <Property Name="ServiceId" Type="Int32" />
+    <Property Name="BookingDate" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="Haircut">
     <Key>
@@ -134,6 +138,7 @@
     <NavigationProperty Name="BarberShop" Relationship="Self.FK_Payment_BarberShop" FromRole="Payment" ToRole="BarberShop" />
     <NavigationProperty Name="Booking" Relationship="Self.FK_Payment_Booking" FromRole="Payment" ToRole="Booking" />
     <NavigationProperty Name="User" Relationship="Self.FK_Payment_User1" FromRole="Payment" ToRole="User" />
+    <Property Name="ServiceId" Type="Int32" />
   </EntityType>
   <Association Name="FK_BarberShop_User1">
     <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -369,5 +374,31 @@
       <End Role="UserTypes2" EntitySet="UserTypes2" />
       <End Role="User" EntitySet="Users" />
     </AssociationSet>
+    <EntitySet Name="BarberShopServices" EntityType="BarberShopModel.BarberShopService" />
+    <AssociationSet Name="FK_BarberShopService_BarberShop" Association="BarberShopModel.FK_BarberShopService_BarberShop">
+      <End Role="BarberShop" EntitySet="BarberShops" />
+      <End Role="BarberShopService" EntitySet="BarberShopServices" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="BarberShopService">
+    <Key>
+      <PropertyRef Name="ShopId" />
+    </Key>
+    <Property Name="ShopId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ServiceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ServicePrice" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="BarberShop" Relationship="BarberShopModel.FK_BarberShopService_BarberShop" FromRole="BarberShopService" ToRole="BarberShop" />
+  </EntityType>
+  <Association Name="FK_BarberShopService_BarberShop">
+    <End Type="BarberShopModel.BarberShop" Role="BarberShop" Multiplicity="1" />
+    <End Type="BarberShopModel.BarberShopService" Role="BarberShopService" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="BarberShop">
+        <PropertyRef Name="ShopId" />
+      </Principal>
+      <Dependent Role="BarberShopService">
+        <PropertyRef Name="ShopId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

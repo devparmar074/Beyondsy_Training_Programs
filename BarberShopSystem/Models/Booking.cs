@@ -11,7 +11,8 @@ namespace BarberShopSystem.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Booking
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,8 +25,11 @@ namespace BarberShopSystem.Models
         public Nullable<int> ShopId { get; set; }
         public Nullable<int> UserId { get; set; }
         public Nullable<int> HairStylistId { get; set; }
+        public Nullable<int> ServiceId { get; set; }
         public Nullable<int> HaircutId { get; set; }
         public Nullable<System.DateTime> CreatedTime { get; set; }
+        [Required]
+        public Nullable<System.DateTime> BookingDate { get; set; }
     
         public virtual BarberShop BarberShop { get; set; }
         public virtual Haircut Haircut { get; set; }

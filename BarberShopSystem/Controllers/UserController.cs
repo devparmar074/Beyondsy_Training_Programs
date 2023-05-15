@@ -1,4 +1,5 @@
-﻿using BarberShopSystem.Models;
+﻿using BarberShopSystem.Filters;
+using BarberShopSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -8,17 +9,17 @@ using System.Web.Mvc;
 
 namespace BarberShopSystem.Controllers
 {
-   /* public class ViewModel
-    {
-        public IEnumerable<BarberShop> BarberShop { get; set; }
-        public IEnumerable<n   > User { get; set; }
-    }*/
+    /* public class ViewModel
+     {
+         public IEnumerable<BarberShop> BarberShop { get; set; }
+         public IEnumerable<n   > User { get; set; }
+     }*/
 
-
+    
     public class UserController : Controller
     {
         // BarberShop Entity Object Created.
-        BarberShopEntities2 dbObject = new BarberShopEntities2();
+        BarberShopEntities3 dbObject = new BarberShopEntities3();
                 
 
         [HttpGet]
@@ -29,7 +30,6 @@ namespace BarberShopSystem.Controllers
             mymodel.Users = dbObject.Users.ToList();
             mymodel.BarberShop = dbObject.BarberShops.ToList();
             */
-
 
             List<UserTypes2> userTypeList = dbObject.UserTypes2.ToList();
             ViewBag.userTypeList = new SelectList(userTypeList, "UserTypeId", "UserType");
@@ -78,6 +78,7 @@ namespace BarberShopSystem.Controllers
             return result;
         }
 
+      /*  [CustomAuthenticationFilter]*/
         [HttpGet]
         public ActionResult ShopRegistration()
         {
@@ -99,10 +100,10 @@ namespace BarberShopSystem.Controllers
             return RedirectToAction("ShopProfile");
         }
 
+        /*[CustomAuthenticationFilter]*/
         [HttpGet]
         public ActionResult ShopLogin()
         {
-
             return View();
         }
 
@@ -117,48 +118,47 @@ namespace BarberShopSystem.Controllers
             }
             else
             {
-                Session["ShopKey"] = barbershopObject.ShopKey;
+                /*Session["ShopKey"] = barbershopObject.ShopKey;*/
                 /* Session["Password"] = */
                 return RedirectToAction("ShopProfile");
             }
 
-            return View();
+           // return View();
         }
 
 
-
-
+        [CustomAuthenticationFilter]
         [HttpGet]
-        
         public ActionResult ShopProfile()
         {
-            if (Session["ShopKey"] == null)
+            /*if (Session["UserModel"] == null)
             {
                 return RedirectToAction("ShopLogin");
             }
             else
-            {
+            {*/
                 List<BarberShop> barbershopList = dbObject.BarberShops.ToList();
                 ViewBag.barbershopList = barbershopList;
                 return View(barbershopList);
-            }
+            //}
                         
         }
 
+
+        [CustomAuthenticationFilter]
         [HttpGet]
+       
         public ActionResult UpdateShopProfile(int id)
         {
-            if (Session["ShopKey"] == null)
+            /*if (Session["ShopKey"] == null)
             {
                 return RedirectToAction("ShopLogin");
             }
             else
-            {
+            {*/
                 var barbershopRecord = dbObject.BarberShops.Where(x => x.ShopId == id).FirstOrDefault();
                 return View(barbershopRecord);
-            }
-
-                
+            //}                            
         }
 
         [HttpPost]
@@ -218,6 +218,42 @@ namespace BarberShopSystem.Controllers
             return View("Profile");
         }
 
+
+      
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(User userObject)
+        {
+            var credentials = dbObject.Users.Where(model => model.Email == userObject.Email && model.Password == userObject.Password).FirstOrDefault();
+
+            if (credentials != null)
+            {
+                Session["UserModel"] = userObject;
+                var username = Session["UserModel"];
+               
+                
+                ViewBag.greetings = userObject.Name;
+                return RedirectToAction("ShopProfile");
+            }
+
+            else
+            {
+                //  userObject.Password = userObject.Password.Remove(0);
+
+                /* Session["Password"] = */
+                return View();
+            }
+            
+            // return View();
+        }
+
+
+      /*  [CustomAuthenticationFilter]*/
         [HttpGet]
         public ActionResult Profile()
         {
@@ -226,12 +262,15 @@ namespace BarberShopSystem.Controllers
             return View(usersData);
         }
 
+
+        /*[CustomAuthenticationFilter]*/
         [HttpGet]
         public ActionResult UpdateProfile(int id)
         {
             var userRecord = dbObject.BarberShops.Where(x => x.UserId == id).FirstOrDefault();
             return View(userRecord);
         }
+
 
         [HttpPost]
         public ActionResult UpdateProfile(User userObject)

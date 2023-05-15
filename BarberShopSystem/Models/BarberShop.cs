@@ -11,12 +11,14 @@ namespace BarberShopSystem.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class BarberShop
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BarberShop()
         {
+            this.BarberShopServices = new HashSet<BarberShopService>();
             this.Bookings = new HashSet<Booking>();
             this.Haircuts = new HashSet<Haircut>();
             this.HairStylists = new HashSet<HairStylist>();
@@ -26,16 +28,30 @@ namespace BarberShopSystem.Models
     
         public int ShopId { get; set; }
         public int UserId { get; set; }
-        public Nullable<System.DateTime> OpenTime { get; set; }
-        public Nullable<System.DateTime> CloseTime { get; set; }
-        public Nullable<bool> Status { get; set; }
-        public string ShopName { get; set; }
-        public string ShopAddress { get; set; }
-        public string ShopCity { get; set; }
-        public string ShopPassword { get; set; }
+        public Nullable<int> ServiceId { get; set; }
         public string ShopKey { get; set; }
+
+        [Required]
+        public string ShopName { get; set; }
+        [Required]
+        public string ShopAddress { get; set; }
+        [Required]
+        public string ShopCity { get; set; }
+        [Required]
+        public Nullable<System.DateTime> OpenTime { get; set; }
+
+        [Required]
+        public Nullable<System.DateTime> CloseTime { get; set; }
+
+        [Required]
+        public Nullable<bool> Status { get; set; }
+
+        [Required]
+        public string ShopPassword { get; set; }
     
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BarberShopService> BarberShopServices { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
